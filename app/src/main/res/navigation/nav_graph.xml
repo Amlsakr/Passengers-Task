@@ -27,5 +27,9 @@
         android:id="@+id/detailsFragment"
         android:name="com.example.passengerstask.view.DetailsFragment"
         android:label="fragment_details"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details" >
+        <argument
+            android:name="airLineItem"
+            app:argType="com.example.passengerstask.data.model.AirLineItem" />
+    </fragment>
 </navigation>

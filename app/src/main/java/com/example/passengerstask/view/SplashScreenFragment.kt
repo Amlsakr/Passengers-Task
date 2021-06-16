@@ -29,7 +29,7 @@ class SplashScreenFragment : Fragment() {
         Handler(Looper.getMainLooper()).postDelayed({
            Navigation.findNavController(requireView()).navigate(R.id.action_splashScreenFragment_to_homeFragment)
         }, 3000)
-        return inflater.inflate(R.layout.fragment_splash_screen, container, false)
+        return view
     }
 
 
