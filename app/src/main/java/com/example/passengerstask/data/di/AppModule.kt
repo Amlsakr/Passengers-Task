@@ -2,6 +2,7 @@ package com.example.passengerstask.data.di
 
 import android.content.Context
 import com.example.passengerstask.BuildConfig
+import com.example.passengerstask.data.locale.AirLineRoomDataBase
 import com.example.passengerstask.data.retrofit.AirLineApiHelper
 import com.example.passengerstask.data.retrofit.AirLineApiService
 import com.example.passengerstask.data.retrofit.AirLineHelperImplementation
@@ -51,6 +52,12 @@ object AppModule {
     @Provides
     fun provideJobsApiHelper(jobsApiHelperImplementation: AirLineHelperImplementation) : AirLineApiHelper = jobsApiHelperImplementation
 
+    @Provides
+    fun provideDatabase(@ApplicationContext appContext: Context) = AirLineRoomDataBase.getDataBase(appContext)
+
+
+    @Provides
+    fun provideJobDao(db: AirLineRoomDataBase) = db.airLineDao()
 
 
 }

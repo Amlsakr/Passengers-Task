@@ -36,14 +36,15 @@ class HomeFragment : Fragment() , ItemClickListener{
         val view = binding.root
         var homeAdapter = HomeAdapter(requireContext() , this)
 
-        homeFragmentViewModel.res.observe(requireActivity(), Observer {
+        homeFragmentViewModel.local.observe(requireActivity(), Observer {
             it.let { res ->
 
                 if ( res != null) {
 
                     binding.progress.visibility = View.GONE
                     binding.recyclerView.visibility = View.VISIBLE
-                    res.data?.let { it1 -> homeAdapter.setAirLineItemList(it1 as ArrayList<AirLineItem>) }
+        //            res.data?.let { it1 -> homeAdapter.setAirLineItemList(it1 as ArrayList<AirLineItem>) }
+                    homeAdapter.setAirLineItemList(it as ArrayList<AirLineItem>)
                     binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
                     binding.recyclerView.adapter = homeAdapter
                 } else {
@@ -58,10 +59,8 @@ class HomeFragment : Fragment() , ItemClickListener{
         return view
     }
 
-    override fun onClickItem(airLineItem: AirLineItem) {
-
-
-        val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(airLineItem)
+    override fun onClickItem(item: AirLineItem) {
+        val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(item)
         view?.findNavController()?.navigate(action)
 
     }

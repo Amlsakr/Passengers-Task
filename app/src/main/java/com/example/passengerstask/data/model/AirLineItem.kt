@@ -1,25 +1,32 @@
 package com.example.passengerstask.data.model
 
 import android.os.Parcelable
+import androidx.annotation.NonNull
+import androidx.annotation.Nullable
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
+
 
 @Entity(tableName = "airLineTable")
 @Parcelize
 data class AirLineItem(@SerializedName("established")
-                       val established: String = "",
+                       val established: String? = null,
+
                        @SerializedName("country")
-                       val country: String = "",
+                       val country: String? = null,
                        @SerializedName("website")
-                       val website: String = "",
+                       val website: String? = null,
                        @SerializedName("name")
-                       val name: String = "",
+                       val name: String? = null,
                        @SerializedName("head_quaters")
-                       val headQuaters: String = "",
+                       val headQuaters: String? = null,
                        @SerializedName("logo")
-                       val logo: String = "",
+                       val logo: String? = null,
+                       @NonNull
                        @SerializedName("id")
-                       val id: Double = 0.0,
+                       @PrimaryKey
+                       val id: Double ,
                        @SerializedName("slogan")
-                       val slogan: String = "") : Parcelable
+                       val slogan: String? = null ) : Parcelable
