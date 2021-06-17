@@ -13,7 +13,6 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class AirLineItem(@SerializedName("established")
                        val established: String? = null,
-
                        @SerializedName("country")
                        val country: String? = null,
                        @SerializedName("website")

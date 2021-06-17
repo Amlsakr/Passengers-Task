@@ -50,7 +50,7 @@ class HomeViewModel@Inject constructor(private val mainRepository: MainRepositor
 
 
 
-    private suspend fun getJobsFromDataBase(): ArrayList<AirLineItem> {
+     suspend fun getJobsFromDataBase(): ArrayList<AirLineItem> {
         var list: ArrayList<AirLineItem> = arrayListOf()
         _res.postValue(Resource.loading(null))
         mainRepository.getAll().let {
@@ -60,5 +60,12 @@ class HomeViewModel@Inject constructor(private val mainRepository: MainRepositor
         }
         return list
     }
+
+    fun add(item: AirLineItem) =
+            viewModelScope.launch(Dispatchers.IO) {
+                mainRepository.insertItem(item)
+    }
+
+
 }
 
