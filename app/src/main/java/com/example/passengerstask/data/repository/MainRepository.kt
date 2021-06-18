@@ -5,7 +5,7 @@ import com.example.passengerstask.data.model.AirLineItem
 import com.example.passengerstask.data.retrofit.AirLineApiHelper
 import javax.inject.Inject
 
-class MainRepository  @Inject constructor(private val jobsApiHelper: AirLineApiHelper , private val db: AirLineRoomDataBase) {
+open class MainRepository  @Inject constructor(private val jobsApiHelper: AirLineApiHelper , private val db: AirLineRoomDataBase) {
 
     suspend fun getJobsFomInternet() = jobsApiHelper.getPassengers()
 

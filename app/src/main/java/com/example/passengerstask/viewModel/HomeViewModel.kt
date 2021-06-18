@@ -15,10 +15,10 @@ import java.util.ArrayList
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel@Inject constructor(private val mainRepository: MainRepository) : ViewModel() {
-    private val _res = MutableLiveData<Resource<List<AirLineItem>>>()
-    val res: LiveData<Resource<List<AirLineItem>>>
-        get() = _res
+open class HomeViewModel@Inject constructor(private val mainRepository: MainRepository) : ViewModel() {
+    private val _remote = MutableLiveData<Resource<List<AirLineItem>>>()
+    val remote: LiveData<Resource<List<AirLineItem>>>
+        get() = _remote
 
     private val _local = MutableLiveData<List<AirLineItem>>()
     val local: LiveData<List<AirLineItem>>
@@ -30,10 +30,10 @@ class HomeViewModel@Inject constructor(private val mainRepository: MainRepositor
 
 
      fun getJobsFromInternet() = viewModelScope.launch(Dispatchers.IO) {
-     _res.postValue(Resource.loading(null))
+     _remote.postValue(Resource.loading(null))
         mainRepository.getJobsFomInternet().let {
             if (it.isSuccessful) {
-                _res.postValue(Resource.success(it.body()))
+                _remote.postValue(Resource.success(it.body()))
                 it.body()?.let { it1 ->
                     for (item in it1){
                         if(item.id != 0.0)
@@ -42,7 +42,7 @@ class HomeViewModel@Inject constructor(private val mainRepository: MainRepositor
                 }
                 getJobsFromDataBase()
             } else {
-                _res.postValue(Resource.error(it.errorBody().toString(), null))
+                _remote.postValue(Resource.error(it.errorBody().toString(), null))
             }
         }
     }
@@ -52,7 +52,7 @@ class HomeViewModel@Inject constructor(private val mainRepository: MainRepositor
 
      suspend fun getJobsFromDataBase(): ArrayList<AirLineItem> {
         var list: ArrayList<AirLineItem> = arrayListOf()
-        _res.postValue(Resource.loading(null))
+        _remote.postValue(Resource.loading(null))
         mainRepository.getAll().let {
             Log.e("tag", "size of array from DB" + it.size)
             _local.postValue(it)
