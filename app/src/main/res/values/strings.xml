@@ -4,4 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="welcomeMessage">Welcome to Passengers App</string>
     <string name="airlines">Airlines</string>
+    <string name="airLineDetails">Airline Details</string>
+    <string name="visit">Visit</string>
 </resources>

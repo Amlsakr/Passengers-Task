@@ -79,14 +79,13 @@ class HomeFragment : Fragment() , ItemClickListener{
     fun observeData(){
         homeFragmentViewModel.local.observe(requireActivity(), Observer {
             it.let { res ->
-
                 if ( res != null) {
-
                     binding.progress.visibility = View.GONE
                     binding.recyclerView.visibility = View.VISIBLE
+                    binding.editTextTextSearch.visibility = View.VISIBLE
+                    binding.addItem.visibility = View.VISIBLE
                     //            res.data?.let { it1 -> homeAdapter.setAirLineItemList(it1 as ArrayList<AirLineItem>) }
                     homeAdapter.setAirLineItemList(it as ArrayList<AirLineItem>)
-
                     binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
                     binding.recyclerView.adapter = homeAdapter
                 } else {

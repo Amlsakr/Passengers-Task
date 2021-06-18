@@ -48,6 +48,7 @@ class BottomSheetFragment : BottomSheetDialogFragment() {
             val id = generateID()
             val  item = AirLineItem(null,country,null,name,headQuarter,null,id,slogan)
             homeFragmentViewModel.add(item)
+            dismiss()
         }
 
 
