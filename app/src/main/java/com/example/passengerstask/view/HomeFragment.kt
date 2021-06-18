@@ -25,6 +25,7 @@ class HomeFragment : Fragment() , ItemClickListener{
 
     private lateinit var binding: FragmentHomeBinding
     private val homeFragmentViewModel: HomeViewModel by viewModels()
+    private lateinit var homeAdapter : HomeAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,26 +39,9 @@ class HomeFragment : Fragment() , ItemClickListener{
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater)
         val view = binding.root
-        var homeAdapter = HomeAdapter(requireContext() , this)
+         homeAdapter = HomeAdapter(requireContext() , this)
 
-        homeFragmentViewModel.local.observe(requireActivity(), Observer {
-            it.let { res ->
-
-                if ( res != null) {
-
-                    binding.progress.visibility = View.GONE
-                    binding.recyclerView.visibility = View.VISIBLE
-        //            res.data?.let { it1 -> homeAdapter.setAirLineItemList(it1 as ArrayList<AirLineItem>) }
-                    homeAdapter.setAirLineItemList(it as ArrayList<AirLineItem>)
-
-                    binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
-                    binding.recyclerView.adapter = homeAdapter
-                } else {
-                    Snackbar.make(binding.root, "Something went wrong", Snackbar.LENGTH_SHORT)
-                            .show()
-                }
-            }
-        })
+        observeData()
 
         binding.addItem.setOnClickListener {
             Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_bottomSheetFragment)
@@ -73,9 +57,11 @@ class HomeFragment : Fragment() , ItemClickListener{
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if (s.toString().length >= 1) {
+               if (s.toString().length >= 1) {
                     homeAdapter.filter.filter(s)
-                }
+              }else {
+                   observeData()
+               }
             }
 
         })
@@ -88,6 +74,27 @@ class HomeFragment : Fragment() , ItemClickListener{
         val action = HomeFragmentDirections.actionHomeFragmentToDetailsFragment(item)
         view?.findNavController()?.navigate(action)
 
+    }
+
+    fun observeData(){
+        homeFragmentViewModel.local.observe(requireActivity(), Observer {
+            it.let { res ->
+
+                if ( res != null) {
+
+                    binding.progress.visibility = View.GONE
+                    binding.recyclerView.visibility = View.VISIBLE
+                    //            res.data?.let { it1 -> homeAdapter.setAirLineItemList(it1 as ArrayList<AirLineItem>) }
+                    homeAdapter.setAirLineItemList(it as ArrayList<AirLineItem>)
+
+                    binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+                    binding.recyclerView.adapter = homeAdapter
+                } else {
+                    Snackbar.make(binding.root, "Something went wrong", Snackbar.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        })
     }
 
 
