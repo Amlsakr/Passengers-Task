@@ -10,20 +10,9 @@ class MainRepository  @Inject constructor(private val jobsApiHelper: AirLineApiH
     suspend fun getJobsFomInternet() = jobsApiHelper.getPassengers()
 
     val dao = db.airLineDao()
-
-    suspend fun insertAll(airLineItems: List<AirLineItem>): List<Long> {
-        val array = dao.insertAll(airLineItems)
-        return array
-    }
-
     suspend fun getAll(): List<AirLineItem> {
         return dao.getAll()
     }
-
-    suspend fun exists(id: String): Boolean {
-        return dao.exists(id)
-    }
-
     suspend fun insertItem(airLineItem: AirLineItem) {
         dao.insert(airLineItem)
     }

@@ -11,7 +11,7 @@ import kotlinx.android.parcel.Parcelize
 
 @Entity(tableName = "airLineTable")
 @Parcelize
-data class AirLineItem(@SerializedName("established")
+open class AirLineItem(@SerializedName("established")
                        val established: String? = null,
                        @SerializedName("country")
                        val country: String? = null,
@@ -26,6 +26,6 @@ data class AirLineItem(@SerializedName("established")
                        @NonNull
                        @SerializedName("id")
                        @PrimaryKey
-                       val id: Double ,
+                       val id: Double,
                        @SerializedName("slogan")
                        val slogan: String? = null ) : Parcelable

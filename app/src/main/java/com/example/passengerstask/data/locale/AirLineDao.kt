@@ -21,5 +21,5 @@ interface AirLineDao {
 
 
     @Query("SELECT EXISTS (SELECT 1 FROM airLineTable WHERE id = :id)")
-    suspend fun exists(id: String): Boolean
+    suspend fun exists(id: Double): Boolean
 }

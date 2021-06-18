@@ -69,13 +69,13 @@ class HomeFragment : Fragment() , ItemClickListener{
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                if (s.toString().length >= 1) {
-                    homeAdapter.filter.filter(s)
-                }
+
             }
 
             override fun afterTextChanged(s: Editable?) {
-
+                if (s.toString().length >= 1) {
+                    homeAdapter.filter.filter(s)
+                }
             }
 
         })

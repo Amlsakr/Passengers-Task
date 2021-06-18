@@ -1,6 +1,7 @@
 package com.example.passengerstask.view.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Filter
@@ -55,8 +56,8 @@ class HomeAdapter (val context : Context, val itemClickListener: ItemClickListen
                     var filterList =  ArrayList <AirLineItem>()
                     for (item in airLineItemList){
                         if (item.name?.lowercase()?.contains(searchKey.lowercase()) == true ||
-                                item.country?.lowercase()?.contains(searchKey.lowercase()) == true ||
-                                item.id == searchKey.toDouble()       ){
+                                item.country?.lowercase()?.contains(searchKey.lowercase()) == true   ){
+                        //    || item.id == searchKey.toDouble()
                             filterList.add(item)
                         }
                     }
@@ -65,11 +66,13 @@ class HomeAdapter (val context : Context, val itemClickListener: ItemClickListen
 
                 var filterResult = FilterResults()
                 filterResult.values = filteredairLineItemList
+                Log.e("aml","filteredairLineItemList" + filteredairLineItemList.size)
+                Log.e("aml","filterResult" + filterResult.values.toString())
                 return  filterResult
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                filteredairLineItemList = results?.values as ArrayList<AirLineItem>
+                airLineItemList = results?.values as ArrayList<AirLineItem>
                 notifyDataSetChanged()
             }
 
