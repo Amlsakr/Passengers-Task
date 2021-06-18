@@ -26,4 +26,5 @@ You can add Item
 3 Bottom Sheet Fragment you can add item throught it.
 4 Details Fragment you can display details of air line.
 
-![Screenshot](splash.jpeg)
+![Screenshot](splash.jpeg)  ![Screenshot](home.jpeg)
+![Screenshot](add_item.jpeg)  ![Screenshot](details.jpeg)
